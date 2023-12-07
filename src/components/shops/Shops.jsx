@@ -28,7 +28,6 @@ const Shops = () => {
   useEffect(() => {
     if (searchVal) {
       const filterShops = dataShop.filter(shop => shop.name.toLowerCase().includes(searchVal.toLowerCase()))
-      console.log(filterShops)
       setShops(filterShops)
     } else {
       setShops(dataShop)
