@@ -6,7 +6,6 @@ const AuthContext = createContext()
 export const AuthContextProvider = ({ children }) => {
   const [authUser, setAuthUser] = useState(null)
   const [isLogged, setIsLogged] = useState(false)
-  const [mode, setMode] = useState('')
   const [searchVal, setSearchVal] = useState('')
 
   const value = {
@@ -14,8 +13,6 @@ export const AuthContextProvider = ({ children }) => {
     setAuthUser,
     isLogged,
     setIsLogged,
-    mode,
-    setMode,
     searchVal,
     setSearchVal
   }

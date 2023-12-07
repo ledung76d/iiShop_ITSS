@@ -1,14 +1,21 @@
-import { useAuth } from "./components/AuthPage/hook/useAuth"
+import { useEffect, useState } from "react";
 import NavBar from "./components/layout/nav/NavBar"
 import AppRoutes from "./routes/AppRoutes"
+import { useLocation } from "react-router-dom";
 
 function App() {
-  const { mode } = useAuth()
+  const location = useLocation();
+  const [path, setPath] = useState(location.pathname);
+
+  useEffect(() => {
+    setPath(location.pathname);
+  }, [location.pathname]);
+
 
   return (
     <div className="relative text-slate-700">
       <div className='flex flex-col min-h-screen'>
-        {mode === '' && <NavBar />}
+        {path !== '/login' && <NavBar />}
         <AppRoutes />
       </div>
     </div>

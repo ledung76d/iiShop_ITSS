@@ -5,8 +5,8 @@ import ProductCard from "./ProductCard"
 import { useAuth } from "../AuthPage/hook/useAuth";
 
 const ProductsShop = () => {
+  // eslint-disable-next-line no-unused-vars
   const { isLogged } = useAuth();
-  console.log(isLogged);
   const products = Array.from({ length: 9 }, (_, i) => ({
     id: i + 1,
     name: `Dell Latitude 3520`,

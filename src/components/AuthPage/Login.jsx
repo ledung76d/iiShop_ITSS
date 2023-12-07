@@ -12,7 +12,6 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useAuth } from './hook/useAuth';
-import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function Copyright(props) {
@@ -33,7 +32,7 @@ function Copyright(props) {
 const defaultTheme = createTheme();
 
 export default function SignIn() {
-  const { setMode, setIsLogged } = useAuth();
+  const { setIsLogged } = useAuth();
 
   const navigate = useNavigate();
 
@@ -48,12 +47,7 @@ export default function SignIn() {
     });
     setIsLogged(true)
     navigate('/shop')
-    setMode('')
   };
-
-  useEffect(() => {
-    setMode('login')
-  }, [])
 
   return (
     <ThemeProvider theme={defaultTheme}>

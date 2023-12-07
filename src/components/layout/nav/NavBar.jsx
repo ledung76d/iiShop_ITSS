@@ -5,6 +5,7 @@ import AlertButton from "./AlertButton"
 import Search from "./Search"
 import { useAuth } from "../../AuthPage/hook/useAuth"
 import { Avatar } from "@mui/material"
+import Logo from '@root/assets/logo.png'
 
 // eslint-disable-next-line react/prop-types
 const NavBar = () => {
@@ -14,13 +15,13 @@ const NavBar = () => {
 
   return (
     <div className="sticky top-0 w-full z-30 shadow-sm bg-white">
-      <div className="py-4 border-b-[2px]">
+      <div className="py-2 border-b-[2px]">
         <Container>
           <div className="flex items-center justify-between gap-3 md-gap-0">
             <div className="cursor-pointer text-2xl font-bold"
               onClick={() => navigate('/shop')}
             >
-              Logo iiShop
+              <img src={Logo} alt="logo" className="h-16" />
             </div>
             <div className="hidden md:block xl:w-[500px] md:w-[300px]">
               <Search />
