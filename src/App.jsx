@@ -2,6 +2,9 @@ import { useEffect, useState } from "react";
 import NavBar from "./components/layout/nav/NavBar"
 import AppRoutes from "./routes/AppRoutes"
 import { useLocation } from "react-router-dom";
+import Modal from 'react-modal';
+
+Modal.setAppElement('#root');
 
 function App() {
   const location = useLocation();
@@ -14,7 +17,7 @@ function App() {
 
   return (
     <div className="relative text-slate-700">
-      <div className='flex flex-col min-h-screen'>
+      <div className='flex flex-col min-h-screen max-w-[1200px] mx-auto'>
         {path !== '/login' && <NavBar />}
         <AppRoutes />
       </div>

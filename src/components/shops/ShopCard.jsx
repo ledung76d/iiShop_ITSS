@@ -8,7 +8,7 @@ const ShopCard = ({ shop }) => {
 
   return (
     <div className="flex flex-col my-2 cursor-pointer"
-      onClick={() => nagative('/shop/1/overview')}
+      onClick={() => nagative('/shop/' + shop._id + '/overview')}
     >
       <img src="https://laptop88.vn/media/news/0607_BVCN88-small.jpg" alt="test" />
       <div className="flex flex-col gap-2">

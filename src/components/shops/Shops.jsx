@@ -6,15 +6,24 @@ import { useAuth } from "../AuthPage/hook/useAuth"
 import { useEffect, useState } from "react"
 import { dataShop } from "../../utils/test"
 import { shopAPIs } from "../../service"
+import instance from "../../utils/backendApi"
 
 const Shops = () => {
   const { searchVal } = useAuth()
   const [shops, setShops] = useState(dataShop)
   const fetchShops = async () => {
-    console.log('fetching')
     try {
-      const res = await shopAPIs.test()
-      console.log(res)
+      const res = await instance.get('/api/v1/store',{
+        params: {
+          page: 1,
+          limit: 10
+        }
+      });
+      if (res.data.EC === 200){
+        setShops(res.data.data)
+        console.log(res.data.data)
+      }
+      else alert(res.data.message)
     } catch (error) {
       console.log(error)
     }
