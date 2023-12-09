@@ -21,7 +21,28 @@ const OverviewShop = () => {
     return images;
   }
 
-  const images = createImage(10);
+  //const images = createImage(4);
+  const images = [
+    {
+      url: "https://fptshop.com.vn/uploads/originals/2016/2/27//635921650660919288_Xom-noi-01.JPG",
+    },
+    {
+      url: "https://images.fpt.shop/unsafe/filters:quality(5)/fptshop.com.vn/uploads/images/tin-tuc/145345/Originals/NF_1200x628.png"
+    },
+    {
+      url: "https://cdnphoto.dantri.com.vn/j11Cf15v7vJDSvEd-KEj1_OHFiM=/zoom/1200_630/2023/05/10/0905fpt-shop-ly-giai-thanh-cong-tu-chuong-trinh-khuyen-mai-crop-1683685464125.jpeg"
+    },
+    {
+      url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQUcb2zITm0X_lf3i2pUE752mSF69yLVIu7CQ&usqp=CAU"
+    },
+    {
+      url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQc-HOcV7yY9uX8P234O_UgWuPaBbZoiCs5nQ&usqp=CAU"
+    },
+    {
+      url: "https://images.fpt.shop/unsafe/filters:quality(5)/fptshop.com.vn/uploads/images/tin-tuc/146370/Originals/%E1%BA%A3nh_Viber_2022-06-05_17-00-03-831.png"
+    }
+  ]
+  //const images = shop?.images?.slice(1) || [];
 
   useEffect(() => {
     const fetch = async () => {
@@ -64,7 +85,7 @@ const OverviewShop = () => {
               </div>
               <ImageGallery images={images || []} />
               {/* Description */}
-              <div className="mt-3">
+              <div className="mt-5">
                 <span>{parser(shop.description || "")}</span>
               </div>
             </div>

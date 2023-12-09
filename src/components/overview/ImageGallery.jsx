@@ -41,42 +41,43 @@ const ImageGallery = ({ images }) => {
     else if (length === 2){
       return (
         <div className="grid grid-cols-2 gap-2 mt-3">
-          <img src={images[0].url} alt="test" onClick={() => handleOpenModal(0)} />
-          <img src={images[1].url} alt="test" onClick={() => handleOpenModal(1)} />
+          <img src={images[0].url} alt="test" className="border border-gray-300 rounded-md p-2 cursor-pointer object-cover w-full h-full" onClick={() => handleOpenModal(0)} />
+          <img src={images[1].url} alt="test" className="border border-gray-300 rounded-md p-2 cursor-pointer object-cover w-full h-full" onClick={() => handleOpenModal(1)} />
         </div>
       )
     }
     else if (length === 3){
       return (
-        <div className="grid grid-cols-2 gap-2 mt-3">
-          <img src={images[0].url} alt="test" onClick={() => handleOpenModal(0)} />
-          <div className="flex flex-col gap-2">
-            <img src={images[1].url} alt="test" onClick={() => handleOpenModal(1)} />
-            <img src={images[2].url} alt="test" onClick={() => handleOpenModal(2)} />
-          </div>
+        <div className="grid grid-cols-3 gap-2 mt-3">
+            <img src={images[0].url} alt="test" className="border border-gray-300 rounded-md p-2 cursor-pointer object-cover w-full h-full" onClick={() => handleOpenModal(0)} />
+            <img src={images[1].url} alt="test" className="border border-gray-300 rounded-md p-2 cursor-pointer object-cover w-full h-full" onClick={() => handleOpenModal(1)} />
+            <img src={images[2].url} alt="test" className="border border-gray-300 rounded-md p-2 cursor-pointer object-cover w-full h-full" onClick={() => handleOpenModal(2)} />
         </div>
       )
     }
     else if (length === 4){
       return (
         <div className="grid grid-cols-2 gap-2 mt-3">
-          <img src={images[0].url} alt="test" onClick={() => handleOpenModal(0)} />
-          <img src={images[1].url} alt="test" onClick={() => handleOpenModal(1)} />
-          <img src={images[2].url} alt="test" onClick={() => handleOpenModal(2)} />
-          <img src={images[3].url} alt="test" onClick={() => handleOpenModal(3)} />
+          <img src={images[0].url} alt="test" className="border border-gray-300 rounded-md p-2 cursor-pointer object-cover w-full h-full" onClick={() => handleOpenModal(0)} />
+          <div className="flex items-center justify-center rounded-md cursor-pointer relative">
+              <img src={images[1].url} alt="test" className="border border-gray-300 rounded-md p-2 cursor-pointer object-cover w-full h-full" onClick={() => handleOpenModal(1)} />
+              <span className="text-lg font-bold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 rounded">
+                +2
+              </span>
+            </div>
         </div>
       )
     }
     else if (length > 4){
       return (
         <div className="grid grid-cols-2 gap-2 mt-3">
-          <img src={images[0].url} alt="test" className="border border-gray-300 rounded-md p-2 cursor-pointer" onClick={() => handleOpenModal(0)} />
+          <img src={images[0].url} alt="test" className="border border-gray-300 rounded-md p-2 cursor-pointer object-cover w-full h-full" onClick={() => handleOpenModal(0)} />
           <div className="grid grid-cols-2 gap-2" >
-            <img src={images[1].url} alt="test" className="border border-gray-300 rounded-md p-2 cursor-pointer" onClick={() => handleOpenModal(1)} />
-            <img src={images[2].url} alt="test" className="border border-gray-300 rounded-md p-2 cursor-pointer" onClick={() => handleOpenModal(2)} />
-            <img src={images[3].url} alt="test" className="border border-gray-300 rounded-md p-2 cursor-pointer" onClick={() => handleOpenModal(3)} />
+            <img src={images[1].url} alt="test" className="border border-gray-300 rounded-md p-2 cursor-pointer object-cover w-full h-full" onClick={() => handleOpenModal(1)} />
+            <img src={images[2].url} alt="test" className="border border-gray-300 rounded-md p-2 cursor-pointer object-cover w-full h-full" onClick={() => handleOpenModal(2)} />
+            <img src={images[3].url} alt="test" className="border border-gray-300 rounded-md p-2 cursor-pointer object-cover w-full h-full" onClick={() => handleOpenModal(3)} />
             <div className="flex items-center justify-center rounded-md cursor-pointer relative">
-              <img src={images[4].url} alt="test" className="border border-gray-300 rounded-md p-2 cursor-pointer" onClick={() => handleOpenModal(4)} />
+              <img src={images[4].url} alt="test" className="border border-gray-300 rounded-md p-2 cursor-pointer object-cover w-full h-full" onClick={() => handleOpenModal(4)} />
               <span className="text-lg font-bold absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white px-2 rounded">
                 +{length - 4}
               </span>
