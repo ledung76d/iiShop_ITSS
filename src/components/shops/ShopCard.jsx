@@ -1,26 +1,41 @@
+/* eslint-disable react/prop-types */
 import { Rating } from "@mui/material"
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { useNavigate } from "react-router-dom";
 
 const ShopCard = ({ shop }) => {
-  const { name, rating, vote, address } = shop
-  const nagative = useNavigate()
+  const navigate = useNavigate()
 
   return (
-    <div className="flex flex-col my-2 cursor-pointer"
-      onClick={() => nagative('/shop/' + shop._id + '/overview')}
+    <div
+      className="flex flex-col my-2 cursor-pointer border-pointer border-[1.2px]
+     border-slate-200 bg-slate-50 rounded-sm p-2 transition hover:scale-105 text-sm"
+      onClick={() => {
+        const idShop = '6574301e6b41c93addf72dcc'
+        navigate(`/shop/${idShop}/overview`)
+      }}
     >
-      <img src="https://laptop88.vn/media/news/0607_BVCN88-small.jpg" alt="test" />
-      <div className="flex flex-col gap-2">
-        <span>{name}</span>
-        <div className="flex items-center gap-1 text-slate-400">
-          {rating}
-          <Rating value={rating} readOnly />
-          ({vote})
+      <div className="flex flex-col w-full gap-1">
+        <div className="aspect-square overflow-hidden w-full relative">
+          <img
+            src={shop?.images[0]?.url}
+            alt="test"
+            className="h-full w-full object-contain "
+          />
         </div>
-        <div className="flex items-start">
-          <LocationOnIcon color="blue" />
-          <span>{address}</span>
+        <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-2">
+            <span>{shop?.name}</span>
+            <div className="flex items-center gap-1 text-slate-400">
+              {shop?.rating}
+              <Rating value={shop?.rating} readOnly />
+              ({shop?.vote})
+            </div>
+            <div className="flex">
+              <LocationOnIcon color="blue" />
+              <span>{shop?.address}</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

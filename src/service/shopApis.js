@@ -1,11 +1,12 @@
 import backendApi from '../utils/backendApi'
 
 const api = '/api/v1'
-const shopPath = '/shop'
+const shopPath = '/store'
 const shopAPIs = {
-  test: () => {
+  getAll: (param) => {
+    const { page, limit } = param
     return backendApi.get(
-      `${api}${shopPath}`,
+      `${api}${shopPath}?page=${page}&limit=${limit}`,
     )
   },
 }
