@@ -14,7 +14,7 @@ export default function MuiBreadcrumbs() {
   }, []);
 
   return (
-    <div className=' border-b-[1px] sticky top-[89px] w-full z-30 shadow-sm bg-white'>
+    <div className=' border-b-[1px] sticky top-[81px] w-full z-30 shadow-sm bg-white'>
       <Container>
         <div className='flex justify-between'>
           <div className='pt-2 flex gap-8 text-lg font-medium'>

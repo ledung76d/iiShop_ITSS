@@ -17,7 +17,7 @@ function App() {
 
   return (
     <div className="relative text-slate-700">
-      <div className='flex flex-col min-h-screen max-w-[1200px] mx-auto'>
+      <div className='flex flex-col min-h-screen mx-auto'>
         {path !== '/login' && <NavBar />}
         <AppRoutes />
       </div>

@@ -20,6 +20,7 @@ const Button = ({
       ${color === "blue" && "bg-blue-500 text-white"}
       ${color === "orange" && "bg-orange-500  text-white"}
       ${color === "white" && "bg-white text-black"}
+      ${color === "slate" && "bg-slate-700 text-white"}
       ${small ? 'text-sm font-light' : 'text-md font-semibold'}  
       ${small ? 'py-1 px-2 border-[1px]' : 'py-3 px-4 border-2'}
       ${custom ? custom : ''}

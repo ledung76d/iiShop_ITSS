@@ -24,7 +24,7 @@ const AppRoutes = () => {
       <Route
         path="/shop"
         element={
-          <div className="flex flex-col px-10">
+          <div className="flex flex-col">
             <Shops />
           </div>
         }
@@ -32,7 +32,7 @@ const AppRoutes = () => {
       <Route
         path="/shop/:shopId/overview"
         element={
-          <div className="flex flex-col px-10">
+          <div className="flex flex-col">
             <MuiBreadcrumbs />
             <OverviewShop />
           </div>

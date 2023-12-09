@@ -1,9 +1,9 @@
 import Container from "../Container"
 import Heading from "../Heading"
-import Button from "../Button"
 import ReviewFilter from "./ReviewFilter"
 import ReviewCard from "./ReviewCard"
 import { Pagination } from "@mui/material"
+import ReviewModal from "./ReviewModal"
 
 const ReviewsShop = () => {
   return (
@@ -13,7 +13,7 @@ const ReviewsShop = () => {
           <div className="my-5 flex item-center justify-between">
             <Heading title="Đánh giá cửa hàng" />
             <div>
-              <Button label="Viết đánh giá" color="orange" custom={"w-[200px]"} />
+              <ReviewModal />
             </div>
           </div>
           <ReviewFilter />
