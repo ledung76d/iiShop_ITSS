@@ -25,7 +25,7 @@ export default function MuiBreadcrumbs() {
             >
               Tổng quan
             </Link>
-            <Link
+            {/* <Link
               to={`/shop/${shopId}/products`}
               onClick={() => setIsLine('/products')}
               className={isLine === '/products' ? 'font-bold border-b-4 border-[#3b82f6] pb-2' : ''}
@@ -39,7 +39,7 @@ export default function MuiBreadcrumbs() {
               className={isLine === '/reviews' ? ' font-bold border-b-4 border-[#3b82f6] pb-2' : ''}
             >
               Đánh giá
-            </Link>
+            </Link> */}
           </div>
           <div className='py-2'>
             <Button label="Ghé thăm trang web" color="blue" custom={"w-[300px]"} />

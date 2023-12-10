@@ -14,7 +14,9 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route
-        path="/"
+        // path="/"
+        path="*"
+        exact
         element={<HomePage />}
       />
       <Route
@@ -38,7 +40,7 @@ const AppRoutes = () => {
           </div>
         }
       />
-      <Route
+      {/* <Route
         path="/shop/:shopId/products"
         element={
           <>
@@ -55,7 +57,7 @@ const AppRoutes = () => {
             <ReviewsShop />
           </>
         }
-      />
+      /> */}
     </Routes>
   );
 };

@@ -76,12 +76,13 @@ const Shops = () => {
     <div className="">
       <Container>
         <div className="m-4">
-          <Heading title={"Danh sách cửa hàng"} />
+          {/* <Heading title={"Danh sách cửa hàng"} />
           <TopFilter
             listSort={sort}
             handleSort={handleSort}
-          />
+          /> */}
           <div className="mt-4 flex flex-col justify-center items-center">
+            <h1 className="text-3xl font-bold">Kết quả</h1>
             <hr className="w-full my-2 border-2" />
             {isLoading ?
               <Box
