@@ -2,6 +2,7 @@
 import { Rating } from "@mui/material"
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { useNavigate } from "react-router-dom";
+import { truncateText } from "../../utils/truncateText";
 
 const ShopCard = ({ shop }) => {
   const navigate = useNavigate()
@@ -20,20 +21,26 @@ const ShopCard = ({ shop }) => {
           <img
             src={shop?.images[0]?.url}
             alt="test"
-            className="h-full w-full object-contain "
+            className="h-full w-full object-cover"
           />
         </div>
         <div className="flex flex-col gap-2">
           <div className="flex flex-col gap-2">
-            <span>{shop?.name}</span>
+            <span className="text-lg text-slate-600 font-bold overflow-hidden text-ellipsis whitespace-nowrap">
+              {shop?.name}
+            </span>
             <div className="flex items-center gap-1 text-slate-400">
-              {shop?.rating}
-              <Rating value={shop?.rating} readOnly />
-              ({shop?.vote})
+              <span className="text-xl font-bold">{shop?.rating}</span>
+              {shop?.reviews.length > 0 ?
+                <Rating value={shop?.rating} readOnly />
+                :
+                <Rating value={0} readOnly />
+              }
+              <span>({shop?.reviews.length})</span>
             </div>
-            <div className="flex">
+            <div className="flex items-center">
               <LocationOnIcon color="blue" />
-              <span>{shop?.address}</span>
+              <span className="text-slate-500 font-normal overflow-hidden text-ellipsis whitespace-nowrap">{truncateText(shop?.address, 30)}</span>
             </div>
           </div>
         </div>

@@ -1,36 +1,29 @@
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
 
-const listSort = [
+const sortData = [
   {
     id: 1,
-    name: 'Địa chỉ'
+    type: 'name',
+    name: 'Tên',
   },
   {
     id: 2,
-    name: 'Hãng'
+    type: 'date',
+    name: 'Mới nhất',
   },
   {
     id: 3,
-    name: 'Số sao'
+    type: 'rating',
+    name: 'Số sao',
   },
   {
     id: 4,
-    name: 'Số like'
+    type: 'credibility',
+    name: 'Độ uy tín',
   },
-  {
-    id: 5,
-    name: 'số dislike'
-  },
-  {
-    id: 6,
-    name: 'Số bình luận'
-  },
-  {
-    id: 7,
-    name: 'Số bài viết'
-  }
 ]
 
+// eslint-disable-next-line no-unused-vars
 const list = [
   {
     id: 1,
@@ -50,6 +43,7 @@ const list = [
   },
 ]
 
+// eslint-disable-next-line no-unused-vars
 const brand = [
   {
     id: 1,
@@ -93,10 +87,34 @@ const brand = [
   },
 ]
 
-const TopFilter = () => {
+// eslint-disable-next-line react/prop-types
+const SortIcon = ({ sort }) => {
+  if (sort === 'DESC') {
+    return (
+      <ArrowDropDownIcon
+        style={{
+          color: '#F35836',
+          fontSize: '32px',
+        }}
+      />
+    )
+  }
+  return (
+    <ArrowDropDownIcon
+      style={{
+        transform: 'rotate(180deg)',
+        color: '#F35836',
+        fontSize: '32px',
+      }} />
+  )
+
+}
+
+// eslint-disable-next-line react/prop-types
+const TopFilter = ({ listSort, handleSort }) => {
   return (
     <div className='flex flex-col gap-4'>
-      <div className='flex flex-row flex-wrap gap-4'>
+      {/* <div className='flex flex-row flex-wrap gap-4'>
         {brand.map((item) => (
           <div
             key={item.id}
@@ -125,18 +143,21 @@ const TopFilter = () => {
             </div>
           ))}
         </div>
-      </div>
-      <div className='mx-20'>
-        <h1 className='text-2xl font-medium mb-2'>Sắp xếp theo</h1>
+      </div> */}
+      <div className='flex gap-4 mt-4'>
+        <h1 className='text-2xl font-medium mb-2'>Sắp xếp: </h1>
         <div className='flex flex-row gap-4 flex-wrap'>
-          {listSort.map((item) => {
+          {sortData.map((item) => {
             return (
-              <button key={item.id} className='flex gap-2 items-center border-none px-2 rounded-[10px] bg-[#FFC7C2]'>
+              <div
+                key={item.id}
+                className='flex gap-2 cursor-pointer hover:scale-105 
+                  items-center border-none px-2 rounded-[10px] bg-[#FFC7C2]'
+                onClick={() => handleSort(item.type, listSort[item.type])}
+              >
                 <span className='text-sm font-medium'>{item.name}</span>
-                <ArrowDropDownIcon style={{
-                  color: '#F35836'
-                }} />
-              </button>
+                <SortIcon sort={listSort[item.type]} />
+              </div>
             )
           })}
         </div>
