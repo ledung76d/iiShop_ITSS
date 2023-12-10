@@ -45,7 +45,6 @@ const Shops = () => {
       const res = await shopAPIs.getAll(param);
       if (res.data.EC === 200) {
         setShops(res.data.data)
-        console.log(res.data.data)
         const countPage = Math.ceil(res.data.count / 8)
         setTotalPage(countPage)
       }

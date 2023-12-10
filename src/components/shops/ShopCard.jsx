@@ -12,14 +12,13 @@ const ShopCard = ({ shop }) => {
       className="flex flex-col my-2 cursor-pointer border-pointer border-[1.2px]
      border-slate-200 bg-slate-50 rounded-sm p-2 transition hover:scale-105 text-sm"
       onClick={() => {
-        const idShop = '6574301e6b41c93addf72dcc'
-        navigate(`/shop/${idShop}/overview`)
+        navigate(`/shop/${shop._id}/overview`)
       }}
     >
       <div className="flex flex-col w-full gap-1">
         <div className="aspect-square overflow-hidden w-full relative">
           <img
-            src={shop?.images[0]?.url}
+            src={shop?.images[1]?.url}
             alt="test"
             className="h-full w-full object-cover"
           />
