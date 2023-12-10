@@ -14,7 +14,8 @@ const AppRoutes = () => {
   return (
     <Routes>
       <Route
-        path="/"
+        path="*"
+        exact
         element={<HomePage />}
       />
       <Route
