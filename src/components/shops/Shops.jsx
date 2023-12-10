@@ -76,13 +76,12 @@ const Shops = () => {
     <div className="">
       <Container>
         <div className="m-4">
-          {/* <Heading title={"Danh sách cửa hàng"} />
+          <Heading title={"Danh sách cửa hàng"} />
           <TopFilter
             listSort={sort}
             handleSort={handleSort}
-          /> */}
+          />
           <div className="mt-4 flex flex-col justify-center items-center">
-            <h1 className="text-3xl font-bold">Kết quả</h1>
             <hr className="w-full my-2 border-2" />
             {isLoading ?
               <Box
@@ -102,7 +101,6 @@ const Shops = () => {
                   {shops.length > 0 &&
                     < Pagination
                       count={totalPage}
-                      defaultPage={1}
                       page={page}
                       color="secondary"
                       onChange={(e, value) => handleChangePage(e, value)}

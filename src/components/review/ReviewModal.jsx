@@ -20,11 +20,18 @@ const style = {
 };
 
 export default function ReviewModal() {
+  const shop = {
+    name: "Cửa hàng FPT shop Hai Bà Tưng",
+    rating: 4,
+    img: "https://laptop88.vn/media/news/0607_BVCN88-small.jpg",
+    address: "Số 1, đường 2/9, Hải Châu 1, Hải Châu, Đà Nẵng",
+  }
   const [open, setOpen] = useState(false);
+  const [images, setImages] = useState([])
+  const [review, setReview] = useState(shop)
+
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-
-  const [images, setImages] = useState([])
 
   const onChangeInputImage = async (e) => {
     const files = e.target.files
@@ -52,7 +59,7 @@ export default function ReviewModal() {
       >
         <Box sx={style}>
           <Typography id="modal-modal-title" variant="h6" component="h2" className='flex items-center justify-between'>
-            <h1 className='text-3xl font-semibold'>Đánh giá cửa hàng</h1>
+            <span className='text-2xl font-semibold'>Đánh giá cửa hàng</span>
             <CloseIcon
               onClick={handleClose}
               style={{
@@ -66,14 +73,15 @@ export default function ReviewModal() {
             <div>
               <div className='flex gap-8' >
                 <img src="https://laptop88.vn/media/news/0607_BVCN88-small.jpg" alt="" width={128} />
-                <div className='flex flex-col gap-8'>
-                  <h2 className='text-xl font-normal text-slate-500'>Cửa hàng FPT shop Hai Bà Tưng</h2>
+                <div className='flex flex-col gap-4'>
+                  <span className='flex flex-col text-xl font-normal text-slate-500 gap-2'>
+                    {review.name}
+                    <span className='text-xs font-normal text-slate-500'>{review.address}</span>
+                  </span>
                   <Rating
-                    value={4}
                     style={{
-                      fontSize: "32px"
+                      fontSize: "28px"
                     }}
-                    readOnly
                   />
                 </div>
               </div>
@@ -93,15 +101,11 @@ export default function ReviewModal() {
                   onChange={(e) => onChangeInputImage(e)}
                 />
                 <div className='flex items-center'>
-                  {images.length > 0 ? images?.map((image, index) => {
+                  {images.length > 0 && images?.map((image, index) => {
                     return (
-                      <img src={image} alt="" key={index} width={128} />
+                      <img src={"https://cdn.tgdd.vn//News/0//laptop-la-gi-760x427.jpg"} alt="" key={index} width={128} />
                     )
-                  }) :
-                    <div>
-                      Empty
-                    </div>
-                  }
+                  })}
                 </div>
               </div>
               <div className='flex flex-col gap-4 mt-4'>

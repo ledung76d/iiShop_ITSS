@@ -1,5 +1,6 @@
 import { Avatar, Rating } from "@mui/material"
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
+import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 
 const review = {
   name: 'Nguyễn Văn A',
@@ -9,6 +10,7 @@ const review = {
   title: 'Sản phẩm tốt',
   content: 'Sản phẩm tốt, giao hàng nhanh',
   like: 100,
+  disLike: 10,
   img: [
     'https://picsum.photos/200/300',
     'https://picsum.photos/200/300',
@@ -27,11 +29,17 @@ const ReviewCard = () => {
             src={review.avatar}
             sx={{ width: 56, height: 56 }}
           />
-          <div className="flex flex-col gap-5">
-            <div className="flex flex-col gap-2">
+          <div className="flex flex-col ml-5 gap-5">
+            <div className="flex flex-col gap-1">
               <span className="text-slate-700 ml-1">{review.name}</span>
-              <Rating value={review.rating} readOnly />
-              <span className="text-slate-400 ml-1">{review.date}</span>
+              <Rating
+                value={review.rating}
+                style={{
+                  fontSize: "18px"
+                }}
+                readOnly
+              />
+              <span className="text-slate-400 text-xs ml-1">{review.date}</span>
             </div>
             <span className="text-slate-700 ml-1">{review.content}</span>
             <div className="flex flex-row gap-3">
@@ -41,10 +49,33 @@ const ReviewCard = () => {
                 )
               })}
             </div>
-            <div className="flex gap-2">
-              <ThumbUpIcon />
-              <span>{review.like}</span>
+            <div className="flex items-center gap-4">
+              <div className="flex items-center gap-1">
+                <ThumbUpIcon
+                  className="hover:opacity-100"
+                  style={{
+                    color: 'green',
+                    fontSize: '20px',
+                    cursor: 'pointer',
+                    opacity: '0.5'
+                  }}
+                />
+                <span className="text-slate-500">{review.like}</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <ThumbDownIcon
+                  style={{
+                    color: 'red',
+                    fontSize: '20px',
+                    cursor: 'pointer',
+                    opacity: '0.5'
+                  }}
+                />
+                <span className="text-slate-500">{review.disLike}</span>
+              </div>
             </div>
+
+
           </div>
         </div>
       </div>

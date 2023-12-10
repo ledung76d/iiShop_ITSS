@@ -9,12 +9,12 @@ import Shops from '../components/shops/Shops';
 import SignIn from '../components/AuthPage/Login';
 import MuiBreadcrumbs from '../components/layout/MuiBreadcrumbs';
 import HomePage from '../components/homePage/HomePage';
+import ProductDetail from '../components/products/ProductDetail';
 
 const AppRoutes = () => {
   return (
     <Routes>
       <Route
-        // path="/"
         path="*"
         exact
         element={<HomePage />}
@@ -46,6 +46,15 @@ const AppRoutes = () => {
           <>
             <MuiBreadcrumbs />
             <ProductsShop />
+          </>
+        }
+      />
+      <Route
+        path="/shop/:shopId/products/:productId"
+        element={
+          <>
+            <MuiBreadcrumbs />
+            <ProductDetail />
           </>
         }
       />

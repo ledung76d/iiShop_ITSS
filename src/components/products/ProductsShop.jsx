@@ -1,30 +1,53 @@
-import { Pagination } from "@mui/material";
+import { Box, CircularProgress, Pagination } from "@mui/material";
 import Container from "../Container"
 import Heading from "../Heading"
 import ProductCard from "./ProductCard"
 import { useAuth } from "../AuthPage/hook/useAuth";
+import { shopAPIs } from "../../service";
+import { useParams } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const ProductsShop = () => {
   // eslint-disable-next-line no-unused-vars
   const { isLogged } = useAuth();
-  const products = Array.from({ length: 9 }, (_, i) => ({
-    id: i + 1,
-    name: `Dell Latitude 3520`,
-    price: 10000000 + (i + 1) * 500000,
-    image: `https://cdn-amz.woka.io/images/I/715s65DmFlL.jpg`,
-    color: [
-      {
-        name: "Đen",
-        value: "#000"
-      },
-      {
-        name: "Trắng",
-        value: "#fff"
-      }
-    ],
-    discount: (i + 1) % 3 === 0 ? 10 : 0,
-  }));
 
+  const { shopId } = useParams();
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const [page, setPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(1);
+
+  const [dataFinal, setDataFinal] = useState([])
+
+  const fetchProducts = async () => {
+    setIsLoading(true)
+    try {
+      const param = {
+        storeId: shopId,
+      }
+      const res = await shopAPIs.getStoreDetail(param);
+      if (res.data.EC === 200) {
+        const listProduct = res.data.data.products
+        setProducts(listProduct)
+        const countPage = Math.ceil(listProduct.length / 8)
+        setTotalPage(countPage)
+        setDataFinal(listProduct.slice(0, 8))
+      }
+    } catch (error) {
+      console.log(error)
+    }
+    setIsLoading(false)
+  }
+
+  const handleChangePage = (event, value) => {
+    setPage(value)
+    setDataFinal(products.slice((value - 1) * 8, value * 8))
+  }
+
+  useEffect(() => {
+    fetchProducts()
+  }, [shopId])
 
   return (
     <div>
@@ -32,13 +55,27 @@ const ProductsShop = () => {
         <div className="my-4">
           <Heading title="Sản phẩm cửa hàng" />
         </div>
-        <div className="grid grid-cols-2 mt-5 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2x:grid-cols-6 gap-8">
-          {products.map((product) => {
-            return <ProductCard key={product.id} product={product} />
+        <div className="grid grid-cols-2 mt-5 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2x:grid-cols-4 gap-8">
+          {dataFinal.length > 0 && dataFinal?.map((product) => {
+            return <ProductCard key={product._id} product={product} />
           })}
         </div>
         <div className="my-8 flex justify-center items-center">
-          <Pagination count={10} color="secondary" />
+          {!isLoading ?
+            <Pagination
+              count={totalPage}
+              page={page}
+              color="secondary"
+              onChange={(event, value) => handleChangePage(event, value)}
+            /> :
+            <Box
+              sx={{ display: 'flex', minHeight: '300px' }}
+            >
+              <CircularProgress sx={{
+                margin: 'auto',
+              }} />
+            </Box>
+          }
         </div>
       </Container>
     </div>
