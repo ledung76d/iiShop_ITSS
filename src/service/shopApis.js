@@ -9,5 +9,11 @@ const shopAPIs = {
       `${api}${shopPath}?page=${page}&limit=${limit}&name=${name}&date=${date}&rating=${rating}&credibility=${credibility}`,
     )
   },
+  getStoreDetail: (param) => {
+    const { storeId } = param
+    return backendApi.get(
+      `${api}${shopPath}/${storeId}`,
+    )
+  },
 }
 export default shopAPIs

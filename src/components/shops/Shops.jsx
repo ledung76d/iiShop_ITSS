@@ -101,7 +101,7 @@ const Shops = () => {
                   {shops.length > 0 &&
                     < Pagination
                       count={totalPage}
-                      defaultPage={1}
+                      // defaultPage={1}
                       page={page}
                       color="secondary"
                       onChange={(e, value) => handleChangePage(e, value)}

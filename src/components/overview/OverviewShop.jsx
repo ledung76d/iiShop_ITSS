@@ -47,7 +47,6 @@ const OverviewShop = () => {
   useEffect(() => {
     const fetch = async () => {
       const res = await instance.get("/api/v1/store/" + shopId);
-      console.log(res.data);
       if (res.data.EC === 200) {
         setShop(res.data.data);
       }
