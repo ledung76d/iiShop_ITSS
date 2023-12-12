@@ -84,7 +84,7 @@ const OverviewShop = () => {
               </div>
               <ImageGallery images={images || []} />
               {/* Description */}
-              <div className="mt-5">
+              <div className="mt-5 mx-20">
                 <span>{parser(shop.description || "")}</span>
               </div>
             </div>

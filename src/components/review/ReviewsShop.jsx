@@ -1,9 +1,9 @@
 import Container from "../Container"
 import Heading from "../Heading"
 import ReviewFilter from "./ReviewFilter"
-import ReviewCard from "./ReviewCard"
+import MessageCard from "./MessageCard"
 import { Pagination } from "@mui/material"
-import ReviewModal from "./ReviewModal"
+import ReviewModal from "./components/ReviewModal"
 import { useEffect, useState } from "react"
 import { shopAPIs } from "../../service"
 import { useParams } from "react-router-dom"
@@ -104,7 +104,7 @@ const ReviewsShop = () => {
           address: shopDetail.address,
           images: shopDetail.images,
         })
-        console.log(shopDetail)
+        // console.log(shopDetail)
         const listReviews = res.data.data.reviews
         // const countPage = Math.ceil(listReviews.length / 8)
         // setTotalPage(countPage)
@@ -132,9 +132,10 @@ const ReviewsShop = () => {
             filter={filter}
             handleFilter={handleFilter}
           />
-          <div className="w-full mx-5 mt-8 flex flex-col justify-center items-center gap-4">
-            <ReviewCard />
-            <ReviewCard />
+          <div className=" mx-4 mt-8 flex flex-col gap-4">
+            <MessageCard />
+            <hr className="w-full my-2" />
+            <MessageCard />
           </div>
           <div className="my-8 flex justify-center items-center">
             <Pagination

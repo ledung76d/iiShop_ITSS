@@ -92,7 +92,7 @@ const Shops = () => {
                 }} />
               </Box> :
               <>
-                <div className="grid grid-cols-2 mx-20 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2x:grid-cols-4 gap-8">
+                <div className="grid grid-cols-2 mx-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2x:grid-cols-4 gap-8">
                   {shops.length > 0 && shops?.map((shop) => {
                     return <ShopCard key={shop.id} shop={shop} />
                   })}

@@ -13,6 +13,7 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useAuth } from './hook/useAuth';
 import { useNavigate } from 'react-router-dom';
+import Logo from '@root/assets/logo.png'
 
 function Copyright(props) {
   return (
@@ -61,9 +62,7 @@ export default function SignIn() {
             alignItems: 'center',
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
+          <img src={Logo} alt="logo" />
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>

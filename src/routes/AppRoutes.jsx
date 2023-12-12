@@ -40,7 +40,7 @@ const AppRoutes = () => {
           </div>
         }
       />
-      {/* <Route
+      <Route
         path="/shop/:shopId/products"
         element={
           <>
@@ -66,7 +66,7 @@ const AppRoutes = () => {
             <ReviewsShop />
           </>
         }
-      /> */}
+      />
     </Routes>
   );
 };

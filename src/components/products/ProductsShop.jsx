@@ -55,7 +55,7 @@ const ProductsShop = () => {
         <div className="my-4">
           <Heading title="Sản phẩm cửa hàng" />
         </div>
-        <div className="grid grid-cols-2 mt-5 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2x:grid-cols-4 gap-8">
+        <div className="grid grid-cols-2 mt-5 mx-4 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2x:grid-cols-4 gap-8">
           {dataFinal.length > 0 && dataFinal?.map((product) => {
             return <ProductCard key={product._id} product={product} />
           })}
