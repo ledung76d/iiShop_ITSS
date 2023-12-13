@@ -61,13 +61,10 @@ const Shops = () => {
 
   useEffect(() => {
     fetchShops()
-  }, [page, searchVal])
+  }, [page, searchVal, sort])
 
   useEffect(() => {
     if (searchVal) {
-      const filterShops = shops.filter(shop => shop.name.toLowerCase().includes(searchVal.toLowerCase()))
-      setShops(filterShops)
-    } else {
       fetchShops()
     }
   }, [searchVal])
@@ -112,8 +109,8 @@ const Shops = () => {
             }
           </div>
         </div>
-      </Container>
-    </div>
+      </Container >
+    </div >
   )
 }
 

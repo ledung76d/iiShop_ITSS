@@ -19,7 +19,9 @@ function App() {
     <div className="relative text-slate-700">
       <div className='flex flex-col min-h-screen mx-auto'>
         {path !== '/login' && <NavBar />}
-        <AppRoutes />
+        <div className="min-h-screen">
+          <AppRoutes />
+        </div>
       </div>
     </div>
   )

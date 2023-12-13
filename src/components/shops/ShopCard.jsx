@@ -30,15 +30,20 @@ const ShopCard = ({ shop }) => {
             </span>
             <div className="flex items-center gap-1 text-slate-400">
               <span className="text-xl font-bold">{shop?.rating}</span>
-              {shop?.reviews.length > 0 ?
-                <Rating value={shop?.rating} readOnly />
-                :
+              {/* {shop?.reviews.length > 0 ? */}
+              <Rating value={shop?.rating} readOnly />
+              {/* :
                 <Rating value={0} readOnly />
-              }
+              } */}
               <span>({shop?.reviews.length})</span>
             </div>
             <div className="flex items-center">
-              <LocationOnIcon color="blue" />
+              <LocationOnIcon
+                color="blue"
+                style={{
+                  fontSize: '1.2rem'
+                }}
+              />
               <span className="text-slate-500 font-normal overflow-hidden text-ellipsis whitespace-nowrap">{truncateText(shop?.address, 30)}</span>
             </div>
           </div>

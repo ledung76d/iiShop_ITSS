@@ -104,7 +104,6 @@ const ReviewsShop = () => {
           address: shopDetail.address,
           images: shopDetail.images,
         })
-        // console.log(shopDetail)
         const listReviews = res.data.data.reviews
         // const countPage = Math.ceil(listReviews.length / 8)
         // setTotalPage(countPage)
