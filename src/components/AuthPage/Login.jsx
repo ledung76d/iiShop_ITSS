@@ -1,26 +1,27 @@
-import Avatar from '@mui/material/Avatar';
+// import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+// import FormControlLabel from '@mui/material/FormControlLabel';
+// import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
+// import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+// import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useAuth } from './hook/useAuth';
 import { useNavigate } from 'react-router-dom';
 import Logo from '@root/assets/logo.png'
+import { authAPIs } from '../../service';
 
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
+      <Link color="inherit" href="https://www.facebook.com/viet.brand.1">
+        suyGroup
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -37,17 +38,35 @@ export default function SignIn() {
 
   const navigate = useNavigate();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     // login login
     const data = new FormData(event.currentTarget);
-    console.log({
+    const body = {
       email: data.get('email'),
-      password: data.get('password'),
-    });
+      password: data.get('password')
+    }
+    try {
+      const res = await authAPIs.login(body)
+      if (res.data.EC === 200) {
+        const user = res.data.DT
+        // save local storage
+        localStorage.setItem('accessToken', user.accessToken)
+        localStorage.setItem('user', JSON.stringify({
+          _id: user._id,
+          avatar: user.avatar,
+          email: user.email,
+          userName: user.userName,
+          fullname: user.fullname,
+        }))
+        navigate('/shop')
+      }
+    } catch (error) {
+      console.log(error)
+    }
     setIsLogged(true)
-    navigate('/shop')
+
   };
 
   return (
@@ -64,7 +83,7 @@ export default function SignIn() {
         >
           <img src={Logo} alt="logo" />
           <Typography component="h1" variant="h5">
-            Sign in
+            Đăng nhập
           </Typography>
           <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
@@ -87,19 +106,19 @@ export default function SignIn() {
               id="password"
               autoComplete="current-password"
             />
-            <FormControlLabel
+            {/* <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
-            />
+            /> */}
             <Button
               type="submit"
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+              Đăng nhập
             </Button>
-            <Grid container>
+            {/* <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
                   Forgot password?
@@ -110,7 +129,7 @@ export default function SignIn() {
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>
-            </Grid>
+            </Grid> */}
           </Box>
         </Box>
         <Copyright sx={{ mt: 8, mb: 4 }} />
