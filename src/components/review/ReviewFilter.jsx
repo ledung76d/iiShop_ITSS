@@ -13,6 +13,7 @@ const ButtonFilter = ({ option, handleFilter }) => {
          transition cursor-pointer
         ${isSelect ? "border-red-600" : "border-[#AFAFAF]"}
         ${isSelect ? "text-red-600" : "border-[#AFAFAF]"}
+        hidden md:flex
         `}
       onClick={() => handleFilter(key)}
     >

@@ -4,9 +4,9 @@ const api = '/api/v1'
 const shopPath = '/store'
 const shopAPIs = {
   getAll: (param) => {
-    const { page, limit, name, date, rating, credibility } = param
+    const { page, limit, name, date, rating, credibility, search } = param
     return backendApi.get(
-      `${api}${shopPath}?page=${page}&limit=${limit}&name=${name}&date=${date}&rating=${rating}&credibility=${credibility}`,
+      `${api}${shopPath}?page=${page}&limit=${limit}&search=${search}&name=${name}&date=${date}&rating=${rating}&credibility=${credibility}`,
     )
   },
   getStoreDetail: (param) => {

@@ -4,7 +4,6 @@ import { formatPrice } from "../../utils/formatPrice"
 
 const ProductCard = ({ product }) => {
   const { shopId } = useParams()
-  console.log(shopId)
   const navigate = useNavigate()
   const { name, price, images, sale } = product
 

@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react"
+import { createContext, useContext, useEffect, useState } from "react"
 
 const AuthContext = createContext()
 
@@ -8,14 +8,31 @@ export const AuthContextProvider = ({ children }) => {
   const [isLogged, setIsLogged] = useState(false)
   const [searchVal, setSearchVal] = useState('')
 
+  const hanldeLogout = () => {
+    localStorage.removeItem('accessToken')
+    localStorage.removeItem('user')
+    setIsLogged(false)
+  }
   const value = {
     authUser,
     setAuthUser,
     isLogged,
     setIsLogged,
     searchVal,
-    setSearchVal
+    setSearchVal,
+    hanldeLogout,
   }
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken')
+    const user = localStorage.getItem('user')
+    // change json to object
+
+    if (accessToken && user) {
+      setAuthUser(JSON.parse(user))
+      setIsLogged(true)
+    }
+  }, [isLogged])
 
   return (
     <AuthContext.Provider value={value}>
