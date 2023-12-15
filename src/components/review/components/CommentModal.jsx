@@ -6,6 +6,7 @@ import Modal from '@mui/material/Modal';
 import { useState } from 'react';
 import { Rating, TextField } from '@mui/material';
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
+import { useAuth } from '../../AuthPage/hook/useAuth';
 
 const style = {
   position: 'absolute',
@@ -19,16 +20,18 @@ const style = {
   p: 3,
 };
 
-export default function ReviewModal() {
-  const shop = {
-    name: "Cửa hàng FPT shop Hai Bà Tưng",
-    rating: 4,
-    img: "https://laptop88.vn/media/news/0607_BVCN88-small.jpg",
-    address: "Số 1, đường 2/9, Hải Châu 1, Hải Châu, Đà Nẵng",
-  }
+export default function CommentModal({ shop }) {
+  // const shop = {
+  //   name: "Cửa hàng FPT shop Hai Bà Tưng",
+  //   rating: 4,
+  //   img: "https://laptop88.vn/media/news/0607_BVCN88-small.jpg",
+  //   address: "Số 1, đường 2/9, Hải Châu 1, Hải Châu, Đà Nẵng",
+  // }
+  const { authUser, isLogged } = useAuth()
+  console.log(shop)
   const [open, setOpen] = useState(false);
   const [images, setImages] = useState([])
-  const [review, setReview] = useState(shop)
+  const [comment, setComment] = useState(shop)
 
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -45,7 +48,10 @@ export default function ReviewModal() {
   }
 
   const handleOnSubmit = async () => {
-    console.log('submit review')
+    console.log('submit comment')
+    // lấy id use ở authUser 
+    // comment chắc lưu vao comment
+
   }
 
   return (
@@ -72,11 +78,11 @@ export default function ReviewModal() {
           <Typography id="modal-modal-description" sx={{ mt: 4 }}>
             <div>
               <div className='flex gap-8' >
-                <img src="https://laptop88.vn/media/news/0607_BVCN88-small.jpg" alt="" width={128} />
+                <img src={shop?.images[0].url} alt="" width={128} height={128} />
                 <div className='flex flex-col gap-4'>
                   <span className='flex flex-col text-xl font-normal text-slate-500 gap-2'>
-                    {review.name}
-                    <span className='text-xs font-normal text-slate-500'>{review.address}</span>
+                    {comment.name}
+                    <span className='text-xs font-normal text-slate-500'>{shop?.address}</span>
                   </span>
                   <Rating
                     style={{
@@ -86,7 +92,7 @@ export default function ReviewModal() {
                 </div>
               </div>
               <div className='my-4 flex gap-8 item-center'>
-                <label htmlFor="review" className='cursor-pointer'>
+                <label htmlFor="comment" className='cursor-pointer'>
                   <CameraAltIcon
                     style={{
                       fontSize: "48px",
@@ -95,13 +101,13 @@ export default function ReviewModal() {
                   />
                 </label>
                 <input type="file"
-                  id="review" name="avatar"
+                  id="comment" name="avatar"
                   className='hidden'
                   accept="image/png, image/jpeg"
                   onChange={(e) => onChangeInputImage(e)}
                 />
                 <div className='flex items-center'>
-                  {images.length > 0 && images?.map((image, index) => {
+                  {images?.length > 0 && images?.map((image, index) => {
                     return (
                       <img src={"https://cdn.tgdd.vn//News/0//laptop-la-gi-760x427.jpg"} alt="" key={index} width={128} />
                     )
@@ -120,7 +126,7 @@ export default function ReviewModal() {
           </Typography>
           <Typography id="modal-modal-footer" sx={{ mt: 2 }} className='flex items-center flex-row gap-4'>
             <Button label="Hủy bỏ" color="slate" onClick={handleClose} />
-            <Button label="Đăng review" color="orange" onClick={handleOnSubmit} />
+            <Button label="Đăng comment" color="orange" onClick={handleOnSubmit} />
           </Typography>
         </Box>
       </Modal>

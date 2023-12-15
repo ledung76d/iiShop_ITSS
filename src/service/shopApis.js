@@ -15,5 +15,11 @@ const shopAPIs = {
       `${api}${shopPath}/${storeId}`,
     )
   },
+  getReviewsByStoreId: (param) => {
+    const { storeId } = param
+    return backendApi.get(
+      `${api}${shopPath}/${storeId}/comment`,
+    )
+  }
 }
 export default shopAPIs

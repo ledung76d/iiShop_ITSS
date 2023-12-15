@@ -5,7 +5,7 @@ import { formatCountReview } from "../../utils/formatCountReview"
 // eslint-disable-next-line react/prop-types
 const ButtonFilter = ({ option, handleFilter }) => {
   // eslint-disable-next-line react/prop-types
-  const { name, value, key, isSelect } = option
+  const { name, count, key, isSelect } = option
   return (
     <div
       className={`flex items-center px-4 py-1 border 
@@ -18,8 +18,8 @@ const ButtonFilter = ({ option, handleFilter }) => {
       onClick={() => handleFilter(key)}
     >
       {name}
-      {value > 0 && (
-        <span className="ml-1 text-red-600">({formatCountReview(value)})</span>
+      {count > 0 && (
+        <span className="ml-1 text-red-600">({formatCountReview(count)})</span>
       )}
     </div>
   )

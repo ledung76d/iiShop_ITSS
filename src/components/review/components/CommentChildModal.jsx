@@ -3,14 +3,14 @@ import Button from '../../Button';
 import Typography from '@mui/material/Typography';
 import CloseIcon from '@mui/icons-material/Close';
 import Modal from '@mui/material/Modal';
-import { useState } from 'react';
-import { Avatar, TextField } from '@mui/material';
+import { TextField } from '@mui/material';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
 import MessageIcon from '@mui/icons-material/Message';
+import { useAuth } from '../../AuthPage/hook/useAuth';
 
 const style = {
   position: 'absolute',
@@ -81,7 +81,7 @@ const ActionSelect = ({ action, setAction }) => {
   );
 }
 
-export default function MessageChildModal({
+export default function CommentChildModal({
   action,
   setAction,
   open,
@@ -89,7 +89,7 @@ export default function MessageChildModal({
   handleOnSubmit
 }) {
   const handleClose = () => setOpen(false);
-
+  const { authUser, isLogged } = useAuth()
   // truyen noi dung mon submit o day
   const handleCreateChildMessage = () => {
 
