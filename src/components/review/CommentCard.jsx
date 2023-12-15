@@ -1,8 +1,8 @@
 import { Avatar, Rating } from "@mui/material"
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
-import MessageIcon from '@mui/icons-material/Message';
 import CommentChild from "./components/CommentChild";
+import MessageIcon from '@mui/icons-material/Message';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import CommentChildModal from "./components/CommentChildModal";
