@@ -43,50 +43,6 @@ const list = [
   },
 ]
 
-// eslint-disable-next-line no-unused-vars
-const brand = [
-  {
-    id: 1,
-    name: 'apple',
-    img: 'https://upload.wikimedia.org/wikipedia/commons/5/57/MacBook_Air.svg'
-  },
-  {
-    id: 2,
-    name: 'msi',
-    img: 'https://cdnlogo.com/logos/m/5/msi.svg'
-  },
-  {
-    id: 3,
-    name: 'apple',
-    img: 'https://upload.wikimedia.org/wikipedia/commons/5/57/MacBook_Air.svg'
-  },
-  {
-    id: 4,
-    name: 'msi',
-    img: 'https://cdnlogo.com/logos/m/5/msi.svg'
-  },
-  {
-    id: 5,
-    name: 'apple',
-    img: 'https://upload.wikimedia.org/wikipedia/commons/5/57/MacBook_Air.svg'
-  },
-  {
-    id: 6,
-    name: 'apple',
-    img: 'https://upload.wikimedia.org/wikipedia/commons/5/57/MacBook_Air.svg'
-  },
-  {
-    id: 7,
-    name: 'apple',
-    img: 'https://upload.wikimedia.org/wikipedia/commons/5/57/MacBook_Air.svg'
-  },
-  {
-    id: 8,
-    name: 'apple',
-    img: 'https://upload.wikimedia.org/wikipedia/commons/5/57/MacBook_Air.svg'
-  },
-]
-
 // eslint-disable-next-line react/prop-types
 const SortIcon = ({ sort }) => {
   if (sort === 'DESC') {

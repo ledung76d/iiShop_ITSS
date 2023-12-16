@@ -7,15 +7,15 @@ const ProductCard = ({ product }) => {
   const navigate = useNavigate()
   const { name, price, images, sale } = product
 
-  const handleClick = () => {
-    navigate(`/shop/${shopId}/products/${product._id}`)
-  }
+  // const handleClick = () => {
+  //   navigate(`/shop/${shopId}/products/${product._id}`)
+  // }
 
   return (
     <div
       className="col-span-1 cursor-pointer border-pointer border-[1.2px]
      border-slate-200 bg-slate-50 rounded-sm p-2 transition hover:scale-105 text-sm"
-      onClick={handleClick}
+    // onClick={handleClick}
     >
       <div className="flex flex-col w-full gap-1">
         <div className="aspect-square overflow-hidden w-full relative">

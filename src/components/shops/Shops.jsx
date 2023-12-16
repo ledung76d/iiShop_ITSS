@@ -24,8 +24,14 @@ const Shops = () => {
   })
 
   const handleSort = (name, type) => {
+    const newSort = {
+      name: 'DESC',
+      rating: 'DESC',
+      date: 'DESC',
+      credibility: 'DESC'
+    }
     setSort({
-      ...sort,
+      ...newSort,
       [name]: 'DESC' === type ? 'ASC' : 'DESC'
     })
   }

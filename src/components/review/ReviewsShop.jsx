@@ -2,7 +2,7 @@ import Container from "../Container"
 import Heading from "../Heading"
 import ReviewFilter from "./ReviewFilter"
 import CommentCard from "./CommentCard"
-import { Pagination } from "@mui/material"
+import { Box, CircularProgress, Pagination } from "@mui/material"
 import CommentModal from "./components/CommentModal"
 import { useEffect, useState } from "react"
 import { shopAPIs } from "../../service"
@@ -11,14 +11,16 @@ import { useParams } from "react-router-dom"
 const ReviewsShop = () => {
   const { shopId } = useParams()
 
-  const [filter, setFilter] = useState([])
-  const [comments, setComments] = useState([])
-  const [shop, setShop] = useState(null)
+  const [filter, setFilter] = useState([])  // option filter
+  const [comments, setComments] = useState([]) // list comment of shop
+  const [isLoading, setIsLoading] = useState(false) // loading
+  const [shop, setShop] = useState(null) // shop info
 
   const [page, setPage] = useState(1)
-  const [totalPage, setTotalPage] = useState(1)
-  const [dataFilter, setDataFilter] = useState([])
-  const [dataFinal, setDataFinal] = useState([])
+  const [totalPage, setTotalPage] = useState(1) // total page
+  const [dataFilter, setDataFilter] = useState([]) // data after filtering
+  const [dataFinal, setDataFinal] = useState([]) // data final to show page
+
 
   const handleFilter = (key) => {
     // clone filterValue
@@ -77,6 +79,7 @@ const ReviewsShop = () => {
   }
 
   const fetchReviews = async () => {
+    setIsLoading(true)
     try {
       const param = {
         storeId: shopId,
@@ -153,6 +156,7 @@ const ReviewsShop = () => {
     } catch (error) {
       console.log(error)
     }
+    setIsLoading(false)
   }
 
   useEffect(() => {
@@ -162,42 +166,51 @@ const ReviewsShop = () => {
   return (
     <div className="mb-4">
       <Container>
-        <div className="bg-white flex flex-col">
-          <div className="my-5 flex item-center justify-between">
-            <Heading title="Đánh giá cửa hàng" />
-            <div>
-              {shop && (
-                <CommentModal shop={shop} />
+        {!isLoading ?
+          <div className="bg-white flex flex-col">
+            <div className="my-5 flex item-center justify-between">
+              <Heading title="Đánh giá cửa hàng" />
+              <div>
+                {shop && (
+                  <CommentModal shop={shop} />
+                )}
+              </div>
+            </div>
+            <ReviewFilter
+              filter={filter}
+              comments={comments}
+              handleFilter={handleFilter}
+            />
+            <div className=" mx-4 mt-8 flex flex-col gap-4">
+              {dataFinal?.length > 0 && dataFinal?.map((comment) => (
+                <CommentCard key={comment.id} comment={comment} />
+              ))}
+              {
+                dataFinal?.length === 0 &&
+                <div className="text-center text-slate-500 text-2xl font-semibold">
+                  Chưa có đánh giá nào
+                </div>
+              }
+            </div>
+            <div className="my-8 flex justify-center items-center">
+              {totalPage > 0 && (
+                <Pagination
+                  page={page}
+                  count={totalPage}
+                  onChange={(event, value) => handleOnChangePage(event, value)}
+                  color="secondary"
+                />
               )}
             </div>
-          </div>
-          <ReviewFilter
-            filter={filter}
-            comments={comments}
-            handleFilter={handleFilter}
-          />
-          <div className=" mx-4 mt-8 flex flex-col gap-4">
-            {dataFinal?.length > 0 && dataFinal?.map((comment) => (
-              <CommentCard key={comment.id} comment={comment} />
-            ))}
-            {
-              dataFinal?.length === 0 &&
-              <div className="text-center text-slate-500 text-2xl font-semibold">
-                Chưa có đánh giá nào
-              </div>
-            }
-          </div>
-          <div className="my-8 flex justify-center items-center">
-            {totalPage > 0 && (
-              <Pagination
-                page={page}
-                count={totalPage}
-                onChange={(event, value) => handleOnChangePage(event, value)}
-                color="secondary"
-              />
-            )}
-          </div>
-        </div>
+          </div> :
+          <Box
+            sx={{ display: 'flex', minHeight: '300px' }}
+          >
+            <CircularProgress sx={{
+              margin: 'auto',
+            }} />
+          </Box>
+        }
       </Container>
     </div>
   )
