@@ -30,9 +30,8 @@ const AlertButton = () => {
     notifications,
     setNotifications,
   ] = useState([]);
-  
+
   const navigate = useNavigate();
-  
 
   const fetchNotifications = async (
     userId,
@@ -102,66 +101,71 @@ const AlertButton = () => {
     <List disablePadding>
       {notifications.map(
         (notification, index) => (
-            <ListItemButton
-              key={index}
-              disableRipple
-              onClick={() => navigate(`/shop/${notification.store._id}/reviews`)}
+          <ListItemButton
+            key={index}
+            disableRipple
+            onClick={() =>
+              navigate(
+                `/shop/${notification.store._id}/reviews`,
+              )
+            }
+            sx={{
+              p: 2.5,
+              alignItems: 'center',
+              justifyContent: 'center',
+              borderBottom: (theme) =>
+                `dashed 1px ${theme.palette.divider}`,
+            }}
+          >
+            <Avatar
+              src={
+                notification.sender &&
+                notification.sender
+                  .avatar
+              }
               sx={{
-                p: 2.5,
-                alignItems:
-                  'center',
-                justifyContent: 'center',
-                borderBottom: (theme) =>
-                  `dashed 1px ${theme.palette.divider}`,
+                bgcolor:
+                  'background.neutral',
               }}
-            >
-              <Avatar
-                src={
-                  notification.sender && notification.sender
-                    .avatar
-                }
-                sx={{
-                  bgcolor:
-                    'background.neutral',
-                }}
-              />
-              <ListItemText
-                sx={{ ml: 2}}
-                disableTypography
-                primary={
-                  notification.message
-                }
-                secondary={
-                  <Stack
-                    direction="row"
-                    alignItems="center"
-                    sx={{
-                      typography:
-                        'caption',
-                      color:
-                        'text.disabled',
-                    }}
-                    divider={
-                      <Box
-                        sx={{
-                          width: 2,
-                          height: 2,
-                          bgcolor:
-                            'currentColor',
-                          mx: 0.5,
-                          borderRadius:
-                            '50%',
-                        }}
-                      />
-                    }
-                  >
-                    {notification.sender ? notification.sender
-                      .fullname :
-                      'Ẩn danh'}
-                  </Stack>
-                }
-              />
-            </ListItemButton>
+            />
+            <ListItemText
+              sx={{ ml: 2 }}
+              disableTypography
+              primary={
+                notification.message
+              }
+              secondary={
+                <Stack
+                  direction="row"
+                  alignItems="center"
+                  sx={{
+                    typography:
+                      'caption',
+                    color:
+                      'text.disabled',
+                  }}
+                  divider={
+                    <Box
+                      sx={{
+                        width: 2,
+                        height: 2,
+                        bgcolor:
+                          'currentColor',
+                        mx: 0.5,
+                        borderRadius:
+                          '50%',
+                      }}
+                    />
+                  }
+                >
+                  {notification.sender
+                    ? notification
+                        .sender.fullname
+                    : 'Ẩn danh'}
+                </Stack>
+              }
+            />
+          </ListItemButton>
         ),
       )}
     </List>
@@ -170,21 +174,24 @@ const AlertButton = () => {
 
   return (
     <>
-      <IconButton
-        color={
-          drawer ? 'primary' : 'default'
-        }
-        onClick={() => {
-          setDrawer(!drawer);
-        }}
+      <div
+        className="border border-slate-400 rounded-md"
       >
-        <Badge
-          badgeContent={5}
-          color="error"
+        <IconButton
+          color={
+            drawer
+              ? 'primary'
+              : 'default'
+          }
+          onClick={() => {
+            setDrawer(!drawer);
+          }}
         >
-          <NotificationsIcon />
-        </Badge>
-      </IconButton>
+          <Badge color="error">
+            <NotificationsIcon />
+          </Badge>
+        </IconButton>
+      </div>
 
       <Drawer
         open={drawer}
