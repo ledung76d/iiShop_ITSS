@@ -49,7 +49,7 @@ const AppRoutes = () => {
           </>
         }
       />
-      <Route
+      {/* <Route
         path="/shop/:shopId/products/:productId"
         element={
           <>
@@ -57,7 +57,7 @@ const AppRoutes = () => {
             <ProductDetail />
           </>
         }
-      />
+      /> */}
       <Route
         path="/shop/:shopId/reviews"
         element={

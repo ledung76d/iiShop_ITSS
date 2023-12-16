@@ -40,7 +40,7 @@ const AlertButton = () => {
     try {
       const param = {
         page: 1,
-        limit: 10,
+        limit: 50,
         user: userId,
       };
       const res =
@@ -87,7 +87,7 @@ const AlertButton = () => {
           fontWeight: 800,
         }}
       >
-        Thong bao
+        Thông báo
       </Typography>
       <Tooltip title="Mark all as read">
         <IconButton color="primary">
@@ -102,7 +102,6 @@ const AlertButton = () => {
     <List disablePadding>
       {notifications.map(
         (notification, index) => (
-          <>
             <ListItemButton
               key={index}
               disableRipple
@@ -118,7 +117,7 @@ const AlertButton = () => {
             >
               <Avatar
                 src={
-                  notification.sender
+                  notification.sender && notification.sender
                     .avatar
                 }
                 sx={{
@@ -156,14 +155,13 @@ const AlertButton = () => {
                       />
                     }
                   >
-                    {notification.sender
-                      .fullname ||
-                      'An danh'}
+                    {notification.sender ? notification.sender
+                      .fullname :
+                      'Ẩn danh'}
                   </Stack>
                 }
               />
             </ListItemButton>
-          </>
         ),
       )}
     </List>
@@ -173,8 +171,6 @@ const AlertButton = () => {
   return (
     <>
       <IconButton
-        whileTap="tap"
-        whileHover="hover"
         color={
           drawer ? 'primary' : 'default'
         }

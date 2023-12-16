@@ -12,7 +12,7 @@ const ShopCard = ({ shop }) => {
       className="flex flex-col my-2 cursor-pointer border-pointer border-[1.2px]
      border-slate-200 bg-slate-50 rounded-sm p-2 transition hover:scale-105 text-sm"
       onClick={() => {
-        navigate(`/shop/${shop._id}/overview`)
+        navigate(`/shop/${shop.id}/overview`)
       }}
     >
       <div className="flex flex-col w-full gap-1">

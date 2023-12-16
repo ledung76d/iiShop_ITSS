@@ -40,21 +40,6 @@ class SocketService {
     this.socket.disconnect();
   }
 }
-// static socket =
-//   io('http://localhost:8000', {
-//     autoConnect: false,
-//   });
-// connectWithSocketServer(notifications) {
-//   this.socket.connect();
-
-//   this.socket.on('newNotification', (data) => {
-//     notifications.push(data);
-//   });
-// }
-
-// disconnect() {
-//   this.socket.disconnect();
-// }
 
 export const socketService =
   new SocketService();
