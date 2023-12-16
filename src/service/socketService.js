@@ -18,7 +18,7 @@ class SocketService {
     setNotifications
   ) {
     this.socket = io(
-      'http://localhost:8000',
+      import.meta.env.VITE_BACKEND_URL || 'http://localhost:8000',
     );
 
     this.socket.on(
