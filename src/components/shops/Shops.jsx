@@ -17,22 +17,23 @@ const Shops = () => {
   const [totalPage, setTotalPage] = useState(0)
 
   const [sort, setSort] = useState({
-    name: 'DESC',
-    rating: 'DESC',
-    date: 'DESC',
-    credibility: 'DESC'
+    ratingAz: false,
+    ratingZa: true,
+    credibilityAz: false,
+    credibilityZa: false,
   })
 
-  const handleSort = (name, type) => {
+  const handleSort = (name) => {
     const newSort = {
-      name: 'DESC',
-      rating: 'DESC',
-      date: 'DESC',
-      credibility: 'DESC'
+      ratingAz: false,
+      ratingZa: false,
+      credibilityAz: false,
+      credibilityZa: false,
     }
+    if (sort[name] === true) return;
     setSort({
       ...newSort,
-      [name]: 'DESC' === type ? 'ASC' : 'DESC'
+      [name]: true
     })
   }
 
@@ -43,12 +44,10 @@ const Shops = () => {
         page: page - 1,
         limit: 8,
         search: searchVal,
-        name: sort.name,
-        rating: sort.rating,
-        date: sort.date,
-        credibility: sort.credibility
+        ...sort,
       }
       const res = await shopAPIs.getAll(param);
+      setPage(1)
       if (res.data.EC === 200) {
         setShops(res.data.data)
         const countPage = Math.ceil(res.data.count / 8)
@@ -85,7 +84,7 @@ const Shops = () => {
             handleSort={handleSort}
           />
           <div className="mt-4 flex flex-col justify-center items-center">
-            <hr className="w-full my-2 border-2" />
+            {/* <hr className="w-full my-2 border-2" /> */}
             {isLoading ?
               <Box
                 sx={{ display: 'flex', minHeight: '300px' }}

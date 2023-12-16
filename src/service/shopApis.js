@@ -7,14 +7,14 @@ const shopAPIs = {
     const {
       page,
       limit,
-      name,
-      date,
-      rating,
-      credibility,
       search,
+      ratingAz,
+      ratingZa,
+      credibilityAz,
+      credibilityZa,
     } = param;
     return backendApi.get(
-      `${api}${shopPath}?page=${page}&limit=${limit}&search=${search}&name=${name}&date=${date}&rating=${rating}&credibility=${credibility}`,
+      `${api}${shopPath}?page=${page}&limit=${limit}&search=${search}&ratingAz=${ratingAz}&ratingZa=${ratingZa}&credibilityAz=${credibilityAz}&credibilityZa=${credibilityZa} `,
     );
   },
   getStoreDetail: (param) => {
