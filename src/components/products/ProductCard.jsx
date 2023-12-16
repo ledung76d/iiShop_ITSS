@@ -26,8 +26,17 @@ const ProductCard = ({ product }) => {
         </div>
         <div className="">
           <div className="flex flex-col gap-2">
-            <div className="text-slate-500 font-semibold">
-              {name}
+            <div
+              className="text-slate-500 font-semibold h-[60px]"
+              style={{
+                overflow: "hidden",
+                WebkitLineClamp: 3,
+                WebkitBoxOrient: "vertical",
+                textTransform: 'uppercase',
+                display: "-webkit-box",
+              }}
+            >
+              <span>{name}</span>
             </div>
             <div className="flex gap-2 text-slate-600 font-semibold">
               Từ:
@@ -43,7 +52,7 @@ const ProductCard = ({ product }) => {
           </div>
         </div>
       </div>
-    </div>
+    </div >
   )
 }
 
