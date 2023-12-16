@@ -10,17 +10,28 @@ import Box from '@mui/material/Box';
 // import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import {
+  createTheme,
+  ThemeProvider,
+} from '@mui/material/styles';
 import { useAuth } from './hook/useAuth';
 import { useNavigate } from 'react-router-dom';
-import Logo from '@root/assets/logo.png'
+import Logo from '@root/assets/logo.png';
 import { authAPIs } from '../../service';
 
 function Copyright(props) {
   return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
+    <Typography
+      variant="body2"
+      color="text.secondary"
+      align="center"
+      {...props}
+    >
       {'Copyright © '}
-      <Link color="inherit" href="https://www.facebook.com/viet.brand.1">
+      <Link
+        color="inherit"
+        href="https://www.facebook.com/viet.brand.1"
+      >
         suyGroup
       </Link>{' '}
       {new Date().getFullYear()}
@@ -38,40 +49,54 @@ export default function SignIn() {
 
   const navigate = useNavigate();
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (
+    event,
+  ) => {
     event.preventDefault();
 
     // login login
-    const data = new FormData(event.currentTarget);
+    const data = new FormData(
+      event.currentTarget,
+    );
     const body = {
       email: data.get('email'),
-      password: data.get('password')
-    }
+      password: data.get('password'),
+    };
     try {
-      const res = await authAPIs.login(body)
+      const res =
+        await authAPIs.login(body);
       if (res.data.EC === 200) {
-        const user = res.data.DT
+        const user = res.data.DT;
+        console.log(user);
         // save local storage
-        localStorage.setItem('accessToken', user.accessToken)
-        localStorage.setItem('user', JSON.stringify({
-          _id: user._id,
-          avatar: user.avatar,
-          email: user.email,
-          userName: user.userName,
-          fullname: user.fullname,
-        }))
-        navigate('/shop')
+        localStorage.setItem(
+          'accessToken',
+          user.accessToken,
+        );
+        localStorage.setItem(
+          'user',
+          JSON.stringify({
+            id: user.id,
+            avatar: user.avatar,
+            email: user.email,
+            userName: user.userName,
+            fullname: user.fullname,
+          }),
+        );
+        navigate('/shop');
       }
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-    setIsLogged(true)
-
+    setIsLogged(true);
   };
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <Container component="main" maxWidth="xs">
+      <Container
+        component="main"
+        maxWidth="xs"
+      >
         <CssBaseline />
         <Box
           sx={{
@@ -82,10 +107,18 @@ export default function SignIn() {
           }}
         >
           <img src={Logo} alt="logo" />
-          <Typography component="h1" variant="h5">
+          <Typography
+            component="h1"
+            variant="h5"
+          >
             Đăng nhập
           </Typography>
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{ mt: 1 }}
+          >
             <TextField
               margin="normal"
               required
@@ -132,7 +165,9 @@ export default function SignIn() {
             </Grid> */}
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
+        <Copyright
+          sx={{ mt: 8, mb: 4 }}
+        />
       </Container>
     </ThemeProvider>
   );

@@ -1,99 +1,111 @@
-import { Avatar, Rating } from "@mui/material"
+import {
+  Avatar,
+  Rating,
+} from '@mui/material';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
-import CommentChild from "./components/CommentChild";
+import CommentChild from './components/CommentChild';
 import MessageIcon from '@mui/icons-material/Message';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
-import CommentChildModal from "./components/CommentChildModal";
-import { useState } from "react";
+import CommentChildModal from './components/CommentChildModal';
+import {
+  useEffect,
+  useState,
+} from 'react';
+import moment from 'moment';
+import { shopAPIs } from '../../service';
+import { useAuth } from '../AuthPage/hook/useAuth';
 
-const messageChild = [
-  {
-    name: 'Nguyễn Văn A',
-    avatar: 'https://picsum.photos/200/300',
-    date: '2021-10-10 19:16',
-    rating: 5,
-    title: 'Sản phẩm tốt',
-    content: 'Sản phẩm tốt, giao hàng nhanh',
-    like: 100,
-    disLike: 10,
-  },
-  {
-    name: 'Nguyễn Văn A',
-    avatar: 'https://picsum.photos/200/300',
-    date: '2021-10-10 19:16',
-    rating: 5,
-    title: 'Sản phẩm tốt',
-    content: 'Sản phẩm tốt, giao hàng nhanh',
-    like: 100,
-    disLike: 10,
-  },
-  {
-    name: 'Nguyễn Văn A',
-    avatar: 'https://picsum.photos/200/300',
-    date: '2021-10-10 19:16',
-    rating: 5,
-    title: 'Sản phẩm tốt',
-    content: 'Sản phẩm tốt, giao hàng nhanh',
-    like: 100,
-    disLike: 10,
-  },
-  {
-    name: 'Nguyễn Văn A',
-    avatar: 'https://picsum.photos/200/300',
-    date: '2021-10-10 19:16',
-    rating: 5,
-    title: 'Sản phẩm tốt',
-    content: 'Sản phẩm tốt, giao hàng nhanh',
-    like: 100,
-    disLike: 10,
-  },
-  {
-    name: 'Nguyễn Văn A',
-    avatar: 'https://picsum.photos/200/300',
-    date: '2021-10-10 19:16',
-    rating: 5,
-    title: 'Sản phẩm tốt',
-    content: 'Sản phẩm tốt, giao hàng nhanh',
-    like: 100,
-    disLike: 10,
-  },
-]
+const CommentCard = ({
+  comment,
+  shopId,
+}) => {
+  const { authUser, isLogged } =
+    useAuth();
+  const [
+    isShowChildMessage,
+    setIsShowChildMessage,
+  ] = useState(false);
+  const [openModal, setOpenModal] =
+    useState(false);
+  const [action, setAction] =
+    useState('message'); // like, dislike, message
+  const [content, setContent] =
+    useState('');
+  const [feedbacks, setFeedbacks] =
+    useState(comment?.feedbacks || 0);
+  const [likes, setLikes] = useState(
+    comment?.likes || 0,
+  );
+  const [dislikes, setDislikes] =
+    useState(comment?.dislikes || 0);
 
-const review = {
-  name: 'Nguyễn Văn A',
-  avatar: 'https://picsum.photos/200/300',
-  date: '2021-10-10 19:16',
-  rating: 5,
-  title: 'Sản phẩm tốt',
-  content: 'Sản phẩm tốt',
-  like: 100,
-  disLike: 10,
-  img: [
-    'https://picsum.photos/200/300',
-    'https://picsum.photos/200/300',
-    'https://picsum.photos/200/300',
-    'https://picsum.photos/200/300',
-  ],
-  messageChild,
-}
+  const [reactions, setReactions] =
+    useState(comment?.reactions || []);
 
-const CommentCard = ({ comment }) => {
-  const [isShowChildMessage, setIsShowChildMessage] = useState(false)
-  const [openModal, setOpenModal] = useState(false)
-  const [action, setAction] = useState('message') // like, dislike, message
+  useEffect(() => {
+    console.log('comment', comment);
+    console.log('reactions', reactions);
+  }, [comment, reactions]);
 
-  const handleModalAction = (action) => {
-    setAction(action)
-    setOpenModal(true)
-  }
+  const handleModalAction = (
+    action,
+  ) => {
+    setAction(action);
+    setOpenModal(true);
+  };
 
-  const handleCreateChildMessage = (message) => {
-    // Viet o day ne Vanh :D
-    console.log(message)
-    console.log('create child message')
-  }
+  const actionToText = (action) => {
+    switch (action) {
+      case 'like':
+        return 'LIKE';
+      case 'dislike':
+        return 'DISLIKE';
+      case 'message':
+        return 'FEEDBACK';
+      default:
+        return '';
+    }
+  };
+
+  const handleCreateChildMessage =
+    async () => {
+      const res =
+        await shopAPIs.createReaction({
+          storeId: shopId,
+          commentId: comment.id,
+          reaction: {
+            type: actionToText(action),
+            content,
+            user_id: authUser.id,
+          },
+        });
+
+      if (res.data.EC === 200) {
+        console.log('success', res);
+        setContent('');
+        setOpenModal(false);
+        setFeedbacks(
+          res.data.data.feedbacks,
+        );
+        setLikes(res.data.data.likes);
+        setDislikes(
+          res.data.data.dislikes,
+        );
+        setReactions(
+          res.data.data.reactions.sort(
+            (a, b) =>
+              new Date(b.createdAt) -
+              new Date(a.createdAt),
+          ),
+        );
+      } else {
+        setOpenModal(false);
+        setContent('');
+        alert('Có lỗi xảy ra');
+      }
+    };
 
   return (
     <>
@@ -104,37 +116,63 @@ const CommentCard = ({ comment }) => {
               <Avatar
                 alt="name"
                 src={comment?.avatar}
-                sx={{ width: 48, height: 48 }}
+                sx={{
+                  width: 48,
+                  height: 48,
+                }}
               />
               <div className="flex flex-col gap-1">
-                <span className="text-slate-700 font-semibold ml-1">{comment?.fullname}</span>
+                <span className="text-slate-700 font-semibold ml-1">
+                  {comment?.fullname}
+                </span>
                 <Rating
-                  value={comment?.rating}
+                  value={
+                    comment?.rating
+                  }
                   style={{
-                    fontSize: "24px"
+                    fontSize: '24px',
                   }}
                   readOnly
                 />
               </div>
             </div>
-            <span className="text-slate-500 text-xs ml-1">{comment?.createdAt}</span>
+            <span className="text-slate-500 text-xs ml-1">
+              {moment(
+                comment?.createdAt,
+              ).format(
+                'DD/MM/YYYY HH:mm',
+              )}
+            </span>
           </div>
           <div className="flex flex-col m-4">
             <div className="flex flex-col gap-5 mb-4">
-              <span className="text-slate-700 ml-1">{comment?.content}</span>
+              <span className="text-slate-700 ml-1">
+                {comment?.content}
+              </span>
               <div className="flex items-center flex-row gap-3 flex-wrap">
-                {comment?.images?.map((img, index) => {
-                  return (
-                    <img key={index} src={img.url} alt="" className="w-[100px] h-[100px] object-cover" />
-                  )
-                })}
+                {comment?.images?.map(
+                  (img, index) => {
+                    return (
+                      <img
+                        key={index}
+                        src={img.url}
+                        alt=""
+                        className="w-[100px] h-[100px] object-cover"
+                      />
+                    );
+                  },
+                )}
               </div>
             </div>
           </div>
           <div className="flex items-center border-t border-b border-slate-400">
             <div
               className="flex-1 cursor-pointer flex justify-center gap-1 p-2 border-r border-slate-400 opacity-50 hover:opacity-100"
-              onClick={() => handleModalAction('message')}
+              onClick={() =>
+                handleModalAction(
+                  'message',
+                )
+              }
             >
               <MessageIcon
                 style={{
@@ -143,11 +181,17 @@ const CommentCard = ({ comment }) => {
                   cursor: 'pointer',
                 }}
               />
-              <span className="text-slate-500">{comment?.reactions?.length}</span>
+              <span className="text-slate-500">
+                {feedbacks}
+              </span>
             </div>
             <div
               className="flex-1 cursor-pointer flex justify-center gap-1 p-2 border-r border-slate-400 opacity-50 hover:opacity-100"
-              onClick={() => handleModalAction('like')}
+              onClick={() =>
+                handleModalAction(
+                  'like',
+                )
+              }
             >
               <ThumbUpIcon
                 className="hover:opacity-100"
@@ -157,11 +201,17 @@ const CommentCard = ({ comment }) => {
                   cursor: 'pointer',
                 }}
               />
-              <span className="text-slate-500">{comment?.likes}</span>
+              <span className="text-slate-500">
+                {likes}
+              </span>
             </div>
             <div
               className="flex-1 cursor-pointer flex justify-center gap-1 p-2 border-r border-slate-400 opacity-50 hover:opacity-100"
-              onClick={() => handleModalAction('dislike')}
+              onClick={() =>
+                handleModalAction(
+                  'dislike',
+                )
+              }
             >
               <ThumbDownIcon
                 style={{
@@ -170,12 +220,18 @@ const CommentCard = ({ comment }) => {
                   cursor: 'pointer',
                 }}
               />
-              <span className="text-slate-500">{comment?.dislikes}</span>
+              <span className="text-slate-500">
+                {dislikes}
+              </span>
             </div>
 
             <div
               className="hover:bg-slate-200 p-2"
-              onClick={() => setIsShowChildMessage(!isShowChildMessage)}
+              onClick={() =>
+                setIsShowChildMessage(
+                  !isShowChildMessage,
+                )
+              }
             >
               {isShowChildMessage ? (
                 <KeyboardArrowDownIcon
@@ -183,32 +239,43 @@ const CommentCard = ({ comment }) => {
                     color: 'red',
                     fontSize: '24px',
                     cursor: 'pointer',
-                    margin: "0 4px"
+                    margin: '0 4px',
                   }}
                 />
-              ) :
+              ) : (
                 <KeyboardArrowUpIcon
                   style={{
                     color: 'red',
                     fontSize: '24px',
                     cursor: 'pointer',
-                    margin: "0 4px"
+                    margin: '0 4px',
                   }}
                 />
-              }
+              )}
             </div>
           </div>
           <div className="m-4 flex flex-col ">
-            {isShowChildMessage && comment?.reactions.length > 0 && comment?.reactions?.map((child) => {
-              return (
-                <CommentChild key={child.name} message={child} />
-              )
-            })}
-            {isShowChildMessage && comment?.reactions.length === 0 && (
-              <div className="flex justify-center">
-                <button className="text-slate-500">Không có nhận xét</button>
-              </div>
-            )}
+            {isShowChildMessage &&
+              reactions.length > 0 &&
+              reactions?.map(
+                (child) => {
+                  return (
+                    <CommentChild
+                      key={child.name}
+                      message={child}
+                    />
+                  );
+                },
+              )}
+            {isShowChildMessage &&
+              comment?.reactions
+                .length === 0 && (
+                <div className="flex justify-center">
+                  <button className="text-slate-500">
+                    Không có nhận xét
+                  </button>
+                </div>
+              )}
           </div>
         </div>
         <CommentChildModal
@@ -216,14 +283,16 @@ const CommentCard = ({ comment }) => {
           setAction={setAction}
           open={openModal}
           setOpen={setOpenModal}
-          handleOnSubmit={handleCreateChildMessage}
+          handleOnSubmit={
+            handleCreateChildMessage
+          }
+          setContent={setContent}
+          content={content}
         />
       </div>
       <hr className="w-full my-2" />
     </>
+  );
+};
 
-  )
-}
-
-export default CommentCard
-
+export default CommentCard;
