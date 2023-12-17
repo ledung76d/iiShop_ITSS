@@ -24,6 +24,7 @@ const Shops = () => {
   })
 
   const handleSort = (name) => {
+    setPage(1)
     const newSort = {
       ratingAz: false,
       ratingZa: false,
@@ -47,7 +48,6 @@ const Shops = () => {
         ...sort,
       }
       const res = await shopAPIs.getAll(param);
-      setPage(1)
       if (res.data.EC === 200) {
         setShops(res.data.data)
         const countPage = Math.ceil(res.data.count / 8)
@@ -66,12 +66,10 @@ const Shops = () => {
 
   useEffect(() => {
     fetchShops()
-  }, [page, searchVal, sort])
+  }, [page, sort])
 
   useEffect(() => {
-    if (searchVal) {
-      fetchShops()
-    }
+    fetchShops()
   }, [searchVal])
 
   return (
