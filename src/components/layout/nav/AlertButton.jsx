@@ -106,7 +106,7 @@ const AlertButton = () => {
             disableRipple
             onClick={() =>
               navigate(
-                `/shop/${notification.store._id}/reviews`,
+                `/shop/${notification.store.id}/reviews`,
               )
             }
             sx={{
