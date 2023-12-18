@@ -2,6 +2,7 @@ import { Avatar } from '@mui/material';
 import MessageIcon from '@mui/icons-material/Message';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import ThumbDownIcon from '@mui/icons-material/ThumbDown';
+import moment from 'moment';
 
 const Icon = ({ type }) => {
   if (type === 'LIKE')
@@ -53,7 +54,11 @@ const CommentChild = ({ message }) => {
             </div>
             <span className="text-xs text-slate-500">
               {' '}
-              {message?.createdAt}
+              {moment(
+                message?.createdAt,
+              ).format(
+                'DD/MM/YYYY HH:mm',
+              )}
             </span>
           </div>
           <span>
