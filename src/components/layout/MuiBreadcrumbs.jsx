@@ -42,7 +42,9 @@ export default function MuiBreadcrumbs() {
             </Link>
           </div>
           <div className='py-2'>
-            <Button label="Ghé thăm trang web" color="blue" custom={"w-[300px]"} />
+            <a href="https://fptshop.com.vn/may-tinh-xach-tay" target="_blank" rel="noopener noreferrer">
+              <Button label="Ghé thăm trang web" color="blue" custom={"w-[300px]"} />
+            </a>
           </div>
         </div>
       </Container>
