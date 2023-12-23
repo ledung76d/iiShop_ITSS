@@ -14,15 +14,13 @@ const ButtonFilter = ({
       className={`flex items-center px-4 py-1 border 
         border-[#AFAFAF] bg-white rounded-sm
          transition cursor-pointer
-        ${
-          isSelect
-            ? 'border-red-600'
-            : 'border-[#AFAFAF]'
+        ${isSelect
+          ? 'border-red-600'
+          : 'border-[#AFAFAF]'
         }
-        ${
-          isSelect
-            ? 'text-red-600'
-            : 'border-[#AFAFAF]'
+        ${isSelect
+          ? 'text-red-600'
+          : 'border-[#AFAFAF]'
         }
         hidden md:flex
         `}

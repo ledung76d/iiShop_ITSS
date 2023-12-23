@@ -18,6 +18,7 @@ import { useAuth } from './hook/useAuth';
 import { useNavigate } from 'react-router-dom';
 import Logo from '@root/assets/logo.png';
 import { authAPIs } from '../../service';
+import { useState } from 'react';
 
 function Copyright(props) {
   return (
@@ -48,10 +49,12 @@ export default function SignIn() {
   const { setIsLogged } = useAuth();
 
   const navigate = useNavigate();
+  const [isLogin, setIsLogin] = useState(false)
 
   const handleSubmit = async (
     event,
   ) => {
+    setIsLogin(true)
     event.preventDefault();
 
     // login login
@@ -90,6 +93,7 @@ export default function SignIn() {
       console.log(error);
     }
     setIsLogged(true);
+    setIsLogin(false)
   };
 
   return (
@@ -149,8 +153,9 @@ export default function SignIn() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              disabled={isLogin}
             >
-              Đăng nhập
+              {isLogin ? 'Đang đăng nhập...' : 'Đăng nhập'}
             </Button>
             {/* <Grid container>
               <Grid item xs>

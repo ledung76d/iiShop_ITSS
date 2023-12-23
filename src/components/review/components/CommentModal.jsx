@@ -118,7 +118,9 @@ export default function CommentModal({
       );
       const res = await response.json();
       return res;
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const clearData = () => {
@@ -183,6 +185,7 @@ export default function CommentModal({
         custom={'w-[200px]'}
         onClick={handleOpen}
       />
+
       <Modal
         open={open}
         onClose={handleClose}
@@ -222,8 +225,8 @@ export default function CommentModal({
                   width={128}
                   height={128}
                 />
-                <div className="flex flex-col gap-4">
-                  <span className="flex flex-col text-xl font-normal text-slate-500 gap-2">
+                <div className="">
+                  <span className="mb-4 flex flex-col text-xl font-normal text-slate-500 gap-2">
                     {comment.name}
                     <span className="text-xs font-normal text-slate-500">
                       {shop?.address}
@@ -231,8 +234,9 @@ export default function CommentModal({
                   </span>
                   <Rating
                     style={{
-                      fontSize: '28px',
+                      fontSize: '32px',
                     }}
+                    defaultValue={5}
                     onChange={(e) =>
                       setNewReview({
                         ...newReview,
@@ -243,6 +247,7 @@ export default function CommentModal({
                     }
                   />
                 </div>
+
               </div>
               <div className="my-4 flex gap-8 item-center">
                 <label
@@ -281,7 +286,12 @@ export default function CommentModal({
                             src={image}
                             alt=""
                             key={index}
-                            width={128}
+                            style={{
+                              height: '40px',
+                              width: '40px',
+                              borderRadius: '4px',
+                              border: '1px solid #E5E7EB',
+                            }}
                           />
                         );
                       },
@@ -316,6 +326,7 @@ export default function CommentModal({
                 label="Hủy bỏ"
                 color="slate"
                 onClick={handleClose}
+                disabled={loading}
               />
             </Box>
             <Box
@@ -326,13 +337,14 @@ export default function CommentModal({
               }}
             >
               <Button
-                label="Đăng comment"
+                label='Đăng comment'
                 color={
                   loading
                     ? 'slate'
                     : 'orange'
                 }
-                disabled={loading}
+                isLoading={loading}
+                // disabled={loading}
                 onClick={handleOnSubmit}
               />
               {loading && (

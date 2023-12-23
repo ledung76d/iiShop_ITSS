@@ -160,7 +160,7 @@ const AlertButton = () => {
                 >
                   {notification.sender
                     ? notification
-                        .sender.fullname
+                      .sender.fullname
                     : 'Ẩn danh'}
                 </Stack>
               }
@@ -175,7 +175,7 @@ const AlertButton = () => {
   return (
     <>
       <div
-        className="border border-slate-400 rounded-md"
+        className="border border-slate-400 rounded-md hover:bg-slate-400"
       >
         <IconButton
           color={

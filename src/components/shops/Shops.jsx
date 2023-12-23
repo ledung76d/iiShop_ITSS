@@ -69,6 +69,7 @@ const Shops = () => {
   }, [page, sort])
 
   useEffect(() => {
+    setPage(1)
     fetchShops()
   }, [searchVal])
 
