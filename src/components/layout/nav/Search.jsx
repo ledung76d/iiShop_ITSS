@@ -22,7 +22,8 @@ const Search = () => {
     const delayDebounceFn = setTimeout(() => {
       // Thực hiện tác vụ tìm kiếm ở đây
       setSearchVal(inputValue)
-      navigate(`/shop?search=${inputValue}`)
+      if (inputValue !== '')
+        navigate(`/shop?search=${inputValue}`)
       console.log("Searching for:", inputValue);
     }, 500); // 300 milliseconds là khoảng thời gian debounce
 
