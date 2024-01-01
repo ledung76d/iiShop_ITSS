@@ -83,7 +83,7 @@ const CommentCard = ({
         });
 
       if (res.data.EC === 200) {
-        console.log('success', res);
+        // console.log('success', res);
         setContent('');
         setOpenModal(false);
         setFeedbacks(

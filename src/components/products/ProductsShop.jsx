@@ -27,7 +27,7 @@ const ProductsShop = () => {
         storeId: shopId,
       }
       const res = await shopAPIs.getStoreDetail(param);
-      console.log('res', res)
+      // console.log('res', res)
       if (res.data.EC === 200) {
         const listProduct = res.data.data.products
         setProducts(listProduct)

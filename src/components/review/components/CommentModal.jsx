@@ -149,7 +149,7 @@ export default function CommentModal({
     return urls;
   };
   const handleOnSubmit = async () => {
-    console.log('submit comment');
+    // console.log('submit comment');
     setLoading(true);
     const urls = await uploadImages(
       newReview.images,

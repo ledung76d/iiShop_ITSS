@@ -70,7 +70,7 @@ export default function SignIn() {
         await authAPIs.login(body);
       if (res.data.EC === 200) {
         const user = res.data.DT;
-        console.log(user);
+        // console.log(user);
         // save local storage
         localStorage.setItem(
           'accessToken',

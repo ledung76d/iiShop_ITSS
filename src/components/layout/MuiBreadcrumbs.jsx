@@ -2,15 +2,31 @@ import { Link, useParams } from 'react-router-dom';
 import Container from '../Container';
 import Button from '../Button';
 import { useEffect, useState } from 'react';
+import instance from '../../utils/backendApi';
 
 export default function MuiBreadcrumbs() {
   const { shopId } = useParams();
   const [isLine, setIsLine] = useState('');
+  const [linkWeb, setLinkWeb] = useState('');
+
+  useEffect(() => {
+    const fetch = async () => {
+      const res = await instance.get(
+        '/api/v1/store/' + shopId,
+      );
+      if (res.data.EC === 200) {
+        // console.log('sos', res.data.data);
+        setLinkWeb(res.data.data.url);
+      } else alert(res.data.message);
+    };
+    fetch();
+  }, [shopId]);
 
   useEffect(() => {
     const pathName = window.location.pathname;
     const part = pathName.split('/');
     setIsLine(`/${part[3]}`);
+
   }, []);
 
   return (
@@ -42,7 +58,7 @@ export default function MuiBreadcrumbs() {
             </Link>
           </div>
           <div className='py-2'>
-            <a href="https://fptshop.com.vn/may-tinh-xach-tay" target="_blank" rel="noopener noreferrer">
+            <a href={linkWeb ? linkWeb : ""} target="_blank" rel="noopener noreferrer">
               <Button label="Ghé thăm trang web" color="blue" custom={"w-[300px]"} />
             </a>
           </div>

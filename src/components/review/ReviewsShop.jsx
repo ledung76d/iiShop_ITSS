@@ -146,7 +146,7 @@ const ReviewsShop = () => {
         });
         const listReviews =
           shop.comments;
-        console.log(listReviews);
+        // console.log(listReviews);
         setComments(listReviews);
         setDataFilter(listReviews);
         setDataFinal(
@@ -283,10 +283,10 @@ const ReviewsShop = () => {
                 )}
               {dataFinal?.length ===
                 0 && (
-                <div className="text-center text-slate-500 text-2xl font-semibold">
-                  Chưa có đánh giá nào
-                </div>
-              )}
+                  <div className="text-center text-slate-500 text-2xl font-semibold">
+                    Chưa có đánh giá nào
+                  </div>
+                )}
             </div>
             <div className="my-8 flex justify-center items-center">
               {totalPage > 0 && (
