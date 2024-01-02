@@ -43,7 +43,7 @@ export default function CommentModal({
 
   const [newReview, setNewReview] =
     useState({
-      rating: 0,
+      rating: 5,
       content: '',
       images: [],
     });
