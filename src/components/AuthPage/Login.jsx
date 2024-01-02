@@ -171,6 +171,19 @@ export default function SignIn() {
             </Grid> */}
           </Box>
         </Box>
+        <Box>
+          <div>
+            <h3 className='font-semibold'>Account DEMO</h3>
+            <div>
+              <span className='font-semibold'>Email:</span>
+              <span>  user0@gmail.com</span>
+            </div>
+            <div>
+              <span className='font-semibold'>Password:</span>
+              <span>  123456</span>
+            </div>
+          </div>
+        </Box>
         <Copyright
           sx={{ mt: 8, mb: 4 }}
         />
